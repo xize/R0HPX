@@ -5,7 +5,7 @@ A easy lightweight static webserver designed for static sinkhole backends
 R0HPX is a small program I wrote to watch sinkholed connections interactively from people within the local network and to work as a static backend to show users a website why it was blocked.
 
 ###how does it work?
-in order to let this program run you need to install NodeJS, after that when you started R0HPX by using /node main.js/, you can choose between 3 modus:
+in order to let this program run you need to install NodeJS, after that when you started R0HPX by using ```node main.js```, you can choose between 3 modus:
 
 - malware
 - advertise

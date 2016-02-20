@@ -6,4 +6,3 @@ function log(a, b) {
 }
 
 exports.log = log;
-exports.log = log;

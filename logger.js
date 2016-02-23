@@ -1,9 +1,21 @@
+var fs = require('fs');
+var writer = fs.createWriteStream("server.log", {flags: 'a'});
+var util = require( "util" );
+
 function log(a, b) {
 	if(typeof b === 'undefined') {
 		b = ''; //since overloading functions doesn't work, check on null and instance it with empty string to fix (undefined text)
 	}
 	var time = formatDate("%D-%M-%Y %h:%m:%s", new Date());
-	return console.log(time + " \033[32m[Info]:\033[37m "+a.toString().trim()+"\033[0m", b);
+	
+	var isWritten = writer.write(time + " [Info]: " + util.format(a.toString().trim(), b) +"\r\n");
+	
+	if(isWritten) {
+		//TODO: add color support for the console!
+		return console.log(time + " \033[32m[Info]:\033[37m "+a.toString().trim()+"\033[0m", b);
+	}
+	
+	writer.end();
 }
 
 function formatDate(format, date) {

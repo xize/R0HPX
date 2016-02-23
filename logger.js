@@ -20,7 +20,7 @@ function log(a, b) {
 
 function formatDate(format, date) {
 	var time = date.toString().split(" ");
-	return format.replace(/%[DMYhms]/g, function(d) {
+	return format.replace(/%+[DMYhms]{1}/g, function(d) {
 		switch(d) {
 		case '%D': d = time[2]; break;
 		case '%M': d = convertMonth(time[1]); break;

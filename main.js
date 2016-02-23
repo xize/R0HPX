@@ -67,7 +67,7 @@ commandexec.addListener("data", function(d) {
 			logger.log("reload - reloads the server, currently only works when redirector mode is enabled");
 			logger.log("stop - stops the server");
 		} else {
-			logger.log("invalid command!");
+			logger.log("invalid command!: "+args.toString().replace(",", " "));
 		}
 	} else if(args.length === 2) {
 		if(args[0].toLowerCase() === 'mode') {
@@ -88,12 +88,12 @@ commandexec.addListener("data", function(d) {
 				redman.fetchRedirectionList();
 				setServer(redirection, "redirection");
 			} else {
-				logger.log("invalid mode!");
+				logger.log("invalid mode!: "+args.toString().replace(",", " "));
 			}
 		} else {
-			logger.log("invalid command!");
+			logger.log("invalid command!: "+args.toString().replace(",", " "));
 		}
 	} else {
-		logger.log("command length is to long!");
+		logger.log("command length is to long!: "+args.toString().replace(",", " "));
 	}
 });

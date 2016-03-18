@@ -16,7 +16,7 @@ var redman = require('./sockets/redirection');
 var redirection = require('./sockets/redirection').handle;
 
 function isSSL() {
-	if(fs.existsSync('cert/server.key') && fs.existsSync('cert/server.crt') && fs.existSync('cert/server.csr')) {
+	if(fs.existsSync('cert/server.key') && fs.existsSync('cert/server.crt') && fs.existsSync('cert/server.csr')) {
 		return true;
 	}
 	return false;

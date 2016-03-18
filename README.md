@@ -15,6 +15,3 @@ once you have choosed one of the options, a web server will run on port 80 and 4
 
 ###what does it not?
 R0HPX does not sinkhole from it self, that means it is required to build your own dns sinkhole where the zones redirect to the servers you wish to host with R0HPX.
-
-###future plans?
-- I'm planning to add support for ssl, currently the ssl server has no certificate so it will not work perfectly

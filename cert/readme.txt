@@ -1,5 +1,5 @@
 in this folder you can generate your own server.key, server.crt and server.csr
-this is need to support ssl on your servers.
+this is needed to support ssl on your servers.
 
 how todo this?:
 

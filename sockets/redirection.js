@@ -30,7 +30,7 @@ function handle(request, response) {
 				var time = data[1];
 				var site = redirectdata[0];
 				var redirect = redirectdata[1];
-				if(site === request.headers.host.toLowerCase()) {
+				if(site === request.headers.host.toLowerCase() || "www."+site === request.headers.host.toLowerCase()) {
 					found = true;
 					logger.log(".::[system runs on redirection mode]::.");
 					logger.log("client "+request.connection.remoteAddress+" visited "+request.headers.host+request.url+" and has been redirected to " + redirect);

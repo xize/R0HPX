@@ -1,0 +1,11 @@
+{
+	"name":"R0HPX",
+	"version":"2.2.1",
+	"main":"src/me.xize.nodeansilogger/test/test.js",
+	"dependencies": {
+		"grunt":"~0.4.5",
+		"grunt-cli":"~1.2.0",
+		"grunt-contrib-jshint":"~0.10.0"
+	},
+	"devDependencies": {}
+}

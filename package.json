@@ -1,0 +1,11 @@
+{
+	"name":"r0hpx",
+	"version":"2.1.0",
+	"main":"src/me.xize.r0hpx/main.js",
+	"dependencies": {
+		"grunt":"~0.4.5",
+		"grunt-cli":"~1.2.0",
+		"grunt-contrib-jshint":"~0.10.0"
+	},
+	"devDependencies": {}
+}
